@@ -24,6 +24,15 @@ int main(int argc, char* argv[]) {
     // count the articles from the input file
     std::ifstream in(argv[1]);
     std::string word;
+    while (in >> word) {
+
+        if (word == "the")
+            ++articleTheCount;
+        else if (word == "an")
+            ++articleAnCount;
+        else if (word == "a")
+            ++articleACount;
+    }
 
     // output report on English-language articles
     std::cout << "the" << ": " << articleTheCount << '\n';
