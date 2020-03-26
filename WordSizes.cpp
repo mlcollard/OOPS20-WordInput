@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <limits>
+#include "WordInput.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -22,6 +23,16 @@ int main(int argc, char* argv[]) {
     size_t minSize = std::numeric_limits<size_t>::max();
     size_t maxSize = 0;
     std::ifstream in(argv[1]);
+    wordRead(in, 
+        [&maxSize, &minSize](const std::string& word)->void {
+
+            if (word.size() > maxSize)
+                maxSize = word.size();
+
+            if (word.size() < minSize)
+                minSize = word.size();
+        }
+    );
 
     // output the word sizes
     std::cout << "Shortest: " << minSize << '\n';
