@@ -8,6 +8,7 @@
 #define INCLUDED_WORD_INPUT_HPP
 
 #include <istream>
+#include <functional>
 
 // read all the words from a file
 void wordRead(std::istream& input,
