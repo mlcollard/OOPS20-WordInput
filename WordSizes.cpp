@@ -9,7 +9,7 @@
 #include <fstream>
 #include <string>
 #include <limits>
-#include "WordInput.hpp"
+#include "WordReader.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -22,8 +22,7 @@ int main(int argc, char* argv[]) {
     // find the range of sizes of the word in the input file
     size_t minSize = std::numeric_limits<size_t>::max();
     size_t maxSize = 0;
-    std::ifstream in(argv[1]);
-    wordRead(in, 
+    WordReader reader(
         [&maxSize, &minSize](const std::string& word)->void {
 
             if (word.size() > maxSize)
@@ -33,6 +32,8 @@ int main(int argc, char* argv[]) {
                 minSize = word.size();
         }
     );
+    std::ifstream in(argv[1]);
+    reader.run(in);
 
     // output the word sizes
     std::cout << "Shortest: " << minSize << '\n';

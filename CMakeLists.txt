@@ -15,6 +15,9 @@ file(GLOB APPLICATIONS "*.cpp")
 file(GLOB WORDINPUTLIST "WordInput.cpp")
 list(GET WORDINPUTLIST 0 WORDINPUT)
 list(REMOVE_ITEM APPLICATIONS ${WORDINPUT})
+file(GLOB WORDINPUTLIST "WordReader.cpp")
+list(GET WORDINPUTLIST 0 WORDINPUT)
+list(REMOVE_ITEM APPLICATIONS ${WORDINPUT})
 
 # Generate executable for each application
 foreach(APP ${APPLICATIONS})
@@ -25,6 +28,6 @@ foreach(APP ${APPLICATIONS})
 	message("Generating target ${APPBASENAME}")
 
     # Application is based on .cpp file only
-    add_executable(${APPBASENAME} ${APPBASENAME}.cpp WordInput.cpp)
+    add_executable(${APPBASENAME} ${APPBASENAME}.cpp WordInput.cpp WordReader.cpp)
 
 endforeach()

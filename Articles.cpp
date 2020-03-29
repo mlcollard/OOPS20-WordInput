@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "WordInput.hpp"
+#include "WordReader.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -23,8 +23,7 @@ int main(int argc, char* argv[]) {
     int articleACount = 0;
 
     // count the articles from the input file
-    std::ifstream in(argv[1]);
-    wordRead(in, 
+    WordReader reader(
         [&](const std::string& word)->void {
             if (word == "the")
                 ++articleTheCount;
@@ -34,6 +33,8 @@ int main(int argc, char* argv[]) {
                 ++articleACount;
         }
     );
+    std::ifstream in(argv[1]);
+    reader.run(in);
 
     // output report on English-language articles
     std::cout << "the" << ": " << articleTheCount << '\n';

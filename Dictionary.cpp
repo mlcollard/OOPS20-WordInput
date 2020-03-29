@@ -9,7 +9,7 @@
 #include <iterator>
 #include <string>
 #include <set>
-#include "WordInput.hpp"
+#include "WordReader.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -21,13 +21,14 @@ int main(int argc, char* argv[]) {
 
     // collect a set of words from the input file
     std::set<std::string> words;
-    std::ifstream in(argv[1]);
-    wordRead(in, 
+    WordReader reader(
         [&words](const std::string& word)->void {
 
             words.insert(word);
         }
     );
+    std::ifstream in(argv[1]);
+    reader.run(in);
 
     // output the dictionary with each word on a single line
     std::copy(words.begin(), words.end(),
