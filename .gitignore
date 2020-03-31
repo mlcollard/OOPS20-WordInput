@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Build garbage
+build
+!build/README.md
