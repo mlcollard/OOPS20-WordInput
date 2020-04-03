@@ -11,8 +11,8 @@
 int main(int argc, char* argv[]) {
 
     // require filename
-    if (argc != 3) {
-        std::cerr << "usage: " << argv[0] << " <input_file> <max_length>\n";
+    if (argc != 2) {
+        std::cerr << "usage: " << argv[0] << " <input_file>\n";
         return 1;
     }
 
