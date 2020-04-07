@@ -5,16 +5,21 @@
 */
 
 #include "WordReader.hpp"
-#include "WordInput.hpp"
 
 // constructor
-WordReader::WordReader(std::function<void(const std::string& word)> process)
-    : process(process) {
-
-}
+WordReader::WordReader()
+    {}
 
 // process all words in input
 void WordReader::run(std::istream& input) {
 
-    wordRead(input, process);
+    std::string word;
+    while (input >> word) {
+
+        // words must begin with an alphabetic character
+        if (!isalpha(word[0]))
+            continue;
+
+        process(word);
+    }
 }

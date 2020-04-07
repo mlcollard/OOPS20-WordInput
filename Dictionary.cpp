@@ -6,10 +6,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <iterator>
-#include <string>
-#include <set>
-#include "WordReader.hpp"
+#include "DictionaryWordReader.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -19,18 +16,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // collect a set of words from the input file
-    std::set<std::string> words;
-    WordReader reader(
-        [&words](const std::string& word)->void {
-
-            words.insert(word);
-        }
-    );
+    // create a dictionary from the input file
+    DictionaryWordReader reader;
     std::ifstream in(argv[1]);
     reader.run(in);
 
     // output the dictionary with each word on a single line
+    const auto& words = reader.getDictionary();
     std::copy(words.begin(), words.end(),
               std::ostream_iterator<std::string>(std::cout, "\n"));
 

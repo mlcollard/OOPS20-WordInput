@@ -8,18 +8,19 @@
 #define INCLUDED_WORD_READER_HPP
 
 #include <istream>
-#include <functional>
 
 class WordReader {
 public:
     // constructor
-    WordReader(std::function<void(const std::string& word)> process);
+    WordReader();
 
     // process all words in input
     void run(std::istream& input);
 
-private:
-    std::function<void(const std::string& word)> process;
+protected:
+
+    // process every word
+    virtual void process(const std::string& word) = 0;
 };
 
 #endif
