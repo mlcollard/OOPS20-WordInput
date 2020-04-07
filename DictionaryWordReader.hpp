@@ -1,7 +1,7 @@
 /*
-	WordReader.hpp
+    WordReader.hpp
 
-	Declarations for reading words from files
+    Declarations for reading words from files
 */
 
 #ifndef INCLUDED_DICTIONARY_WORD_READER_HPP
