@@ -6,8 +6,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
-#include "WordReader.hpp"
+#include "ArticlesWordReader.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -17,29 +16,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // number of each English language article
-    int articleTheCount = 0;
-    int articleAnCount = 0;
-    int articleACount = 0;
-
     // count the articles from the input file
-    WordReader reader(
-        [&](const std::string& word)->void {
-            if (word == "the")
-                ++articleTheCount;
-            else if (word == "an")
-                ++articleAnCount;
-            else if (word == "a")
-                ++articleACount;
-        }
-    );
+    ArticlesWordReader reader;
     std::ifstream in(argv[1]);
     reader.run(in);
 
     // output report on English-language articles
-    std::cout << "the" << ": " << articleTheCount << '\n';
-    std::cout << " an" << ": " << articleAnCount << '\n';  
-    std::cout << "  a" << ": " << articleACount << '\n';   
+    std::cout << "the" << ": " << reader.getCount("the") << '\n';
+    std::cout << " an" << ": " << reader.getCount("an")  << '\n';  
+    std::cout << "  a" << ": " << reader.getCount("a")   << '\n';   
 
     return 0;
 }
